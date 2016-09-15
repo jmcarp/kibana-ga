@@ -2,6 +2,9 @@
   "name": "ga",
   "version": "0.1.0",
   "main": "index.js",
+  "scripts": {
+    "build": "./build.sh"
+  },
   "dependencies": {
     "angular-google-analytics": "^1.1.7"
   }
