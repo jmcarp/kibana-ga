@@ -1,25 +1,19 @@
-# google_analytics
+# Kibana Google Analytics plugin
 
-> google analytics plugin
+## Install
 
----
+`./bin/kibana plugin --install --url https://github.com/jmcarp/kibana-ga/releases/download/v0.1.0/kibana-ga-0.1.0.tar.gz`
 
-## development
+## Configure
 
-See the [kibana contributing guide](https://github.com/elastic/kibana/blob/master/CONTRIBUTING.md) for instructions setting up your development environment. Once you have completed that, use the following npm tasks.
-
-<dl>
-  <dt><code>npm start</code></dt>
-  <dd>Start kibana and have it include this plugin</dd>
-
-  <dt><code>npm run build</code></dt>
-  <dd>Build a distributable archive</dd>
-
-  <dt><code>npm run test:browser</code></dt>
-  <dd>Run the browser tests in a real web browser</dd>
-
-  <dt><code>npm run test:server</code></dt>
-  <dd>Run the server tests using mocha</dd>
-</dl>
-
-For more information about any of these commands run `npm run ${task} -- --help`.
+```yaml
+ga.enabled: true
+ga.name: myTracker
+ga.tracker: UA-XXXXX-xx
+ga.fields:
+  cookieName: gaCookie
+  cookieExpires: 86400
+ga.set:
+  forceSSL: true
+  anonymizeIp: true
+```

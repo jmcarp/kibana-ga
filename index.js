@@ -1,36 +1,30 @@
-import exampleRoute from './server/routes/example';
-
 export default function (kibana) {
   return new kibana.Plugin({
-    require: ['elasticsearch'],
+    id: 'ga',
 
     uiExports: {
-      
-      app: {
-        title: 'Google Analytics',
-        description: 'google analytics plugin',
-        main: 'plugins/google_analytics/app'
-      },
-      
-      
-      hacks: [
-        'plugins/google_analytics/hack'
-      ]
-      
+      hacks: ['plugins/ga/hack'],
+      injectDefaultVars(server) {
+        let config = server.config();
+        return {
+          gaConfig: {
+            name: config.get('ga.name'),
+            tracker: config.get('ga.tracker'),
+            fields: config.get('ga.fields'),
+            set: config.get('ga.set')
+          }
+        };
+      }
     },
 
     config(Joi) {
       return Joi.object({
         enabled: Joi.boolean().default(true),
+        name: Joi.string(),
+        tracker: Joi.string(),
+        fields: Joi.object(),
+        set: Joi.object()
       }).default();
-    },
-
-    
-    init(server, options) {
-      // Add server routes and initalize the plugin here
-      exampleRoute(server);
     }
-    
-
   });
-};
+}

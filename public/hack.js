@@ -1,7 +1,10 @@
-import $ from 'jquery';
+import 'angular-google-analytics';
+import uiModules from 'ui/modules';
+import chrome from 'ui/chrome';
 
-$(document.body).on('keypress', function (event) {
-  if (event.which === 58) {
-    alert('boo!');
-  }
-});
+uiModules.get('kibana', ['angular-google-analytics'])
+  .config(function(AnalyticsProvider) {
+    let config = chrome.getInjected('gaConfig', {});
+    AnalyticsProvider.setAccount(config);
+    AnalyticsProvider.readFromRoute(true);
+  });
