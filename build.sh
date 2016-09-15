@@ -2,6 +2,7 @@
 
 rm -rf build
 mkdir -p build/ga
+version=$(cat package.json | jq -r ".version")
 
 include=("package.json" "index.js" "public")
 for path in ${include[@]}; do
@@ -12,4 +13,4 @@ pushd build/ga
   npm install --production
 popd
 
-tar cvf build/release.tar.gz -C build ga
+tar czvf build/kibana-ga-v${version}.tar.gz -C build ga
