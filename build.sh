@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 rm -rf build
 mkdir -p build/ga
 
 include=("package.json" "index.js" "public")
-for path in $include; do
-  cp $path build/ga
+for path in ${include[@]}; do
+  cp -R $path build/ga
 done
 
 pushd build/ga
